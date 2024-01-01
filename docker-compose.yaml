@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  web:
+    container_name: advent_web
+    build: .
+    image: myapp:latest
+    env_file:
+      - ./config/.env.dev
+    command: >
+      bash -c "python manage.py migrate
+      && python manage.py collectstatic --no-input
+      && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  bot:
+    image: myapp:latest
+    env_file:
+      - ./config/.env.dev
+    command: python manage.py run_bot
+    depends_on:
+      - db
+
+  task:
+    image: myapp:latest
+    env_file:
+      - ./config/.env.dev
+    command: python manage.py run_task
+    depends_on:
+      - db
+
+  db:
+    container_name: advent_db
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./config/.db.env
+
+volumes:
+  postgres_data:

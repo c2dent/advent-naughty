@@ -1,0 +1,65 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: advent_db
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./config/.db.prod.env
+
+  web:
+    container_name: advent_web
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: myapp:latest
+    env_file:
+      - ./config/.env.prod
+    command: >
+      bash -c "python manage.py migrate
+      && python manage.py collectstatic --no-input
+      && python manage.py makemessages -a
+      && python manage.py compilemessages
+      && gunicorn advent_naughty.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - static_volume:/home/app/web/static
+      - media_volume:/home/app/web/media
+    expose:
+      - 8000
+    depends_on:
+      - db
+
+  bot:
+    container_name: advent_bot
+    image: myapp:latest
+    env_file:
+      - ./config/.env.prod
+    command: python manage.py run_bot
+    depends_on:
+      - db
+
+  task:
+    container_name: advent_task
+    image: myapp:latest
+    env_file:
+      - ./config/.env.prod
+    command: python manage.py run_task
+    depends_on:
+      - db
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/web/static
+      - media_volume:/home/app/web/media
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

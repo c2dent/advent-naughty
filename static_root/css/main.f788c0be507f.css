@@ -1,0 +1,206 @@
+@font-face {
+    font-family: 'WinterHunt';
+    src: url("../fonts/WinterHunt.8be18d36325a.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SFProText';
+    src: url("../fonts/SFProText.85bd46c1cff0.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'SFProText', sans-serif;
+}
+
+#emptyBlock {
+    height: 340px;
+}
+
+.list-cell {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.list-cell::after {
+    content: "";
+    flex: auto;
+}
+
+.cell-item-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33.33%;
+}
+
+.item-box {
+    width: 106px;
+    height: 147px;
+    background-size: cover;
+    position: relative;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.box-curtain {
+    width: 106px;
+    height: 147px;
+    backdrop-filter: blur(2px);
+    position: relative;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.second-screen-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cell-item {
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-decor-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.number {
+    color: white;
+    font-family: 'WinterHunt', sans-serif;
+    font-weight: 400;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.cell-status {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    width: 33px;
+    height: 33px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.cell-date {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "SF Pro Rounded", serif;
+    padding: 1px 6px;
+}
+
+.second-screen {
+    position: absolute;
+    z-index: 50;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.box-wrapper {
+    position: relative;
+    padding-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    width: 322px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-header {
+    margin: 10px 0;
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+.content-text {
+    text-align: center;
+    font-family: SFProText, sans-serif;
+    display: block;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 22px;
+    color: rgb(120, 120, 120);
+}
+
+.content-stars {
+    width: 100%;
+    height: 150px;
+    position: relative;
+}
+
+.success-modal {
+    position: absolute;
+    background-color: rgba(50, 50, 50, 0.4);
+    width: 100%;
+    height: 100vh;
+    z-index: 101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-icon {
+    font-size: 28px;
+    color: rgb(164, 164, 164);
+    font-weight: 200
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
