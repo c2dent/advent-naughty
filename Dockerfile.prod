@@ -47,8 +47,6 @@ COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
 COPY ./config/entrypoint.prod.sh $APP_HOME
-COPY ./config/abc0070033.fvds.ru.crt /etc/ssl
-COPY ./config/abc0070033.fvds.ru.key /etc/ssl/private
 
 # copy project
 COPY . $APP_HOME
