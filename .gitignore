@@ -4,4 +4,4 @@ media/upload
 config.yaml
 *.env
 *.dev
-*.prod
+.env.prod
