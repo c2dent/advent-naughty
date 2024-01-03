@@ -26,6 +26,7 @@ services:
     volumes:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
+      - /var/certbot/conf:/etc/letsencrypt/:ro
     expose:
       - 8000
     depends_on:
@@ -55,8 +56,8 @@ services:
     volumes:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
-      - /var/www/static/:/var/www/static/
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
     ports:
       - 8443:8443
     depends_on:
@@ -65,9 +66,8 @@ services:
   certbot:
     image: certbot/certbot:latest
     volumes:
-      - /var/certbot/conf:/etc/letsencrypt/:rw
-      - /var/certbot/www/:/var/www/certbot/:rw
-    command: certonly --webroot --webroot-path=/var/www/certbot -d abc0070033.fvds.ru --email abc0070033@gmail.com --agree-tos --no-eff-email --staging
+      - ./certbot/www/:/var/www/certbot/:rw
+        - ./certbot/conf/:/etc/letsencrypt/:rw
     depends_on:
       - nginx
 
