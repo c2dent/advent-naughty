@@ -51,13 +51,25 @@ services:
 
   nginx:
     build: ./nginx
+    restart: unless-stopped
     volumes:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
+      - /var/www/static/:/var/www/static/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
     ports:
       - 8443:8443
     depends_on:
       - web
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - /var/certbot/conf:/etc/letsencrypt/:rw
+      - /var/certbot/www/:/var/www/certbot/:rw
+    command: certonly --webroot --webroot-path=/var/www/certbot -d abc0070033.fvds.ru --email abc0070033@gmail.com --agree-tos --no-eff-email --staging
+    depends_on:
+      - nginx
 
 volumes:
   postgres_data:
