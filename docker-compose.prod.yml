@@ -64,12 +64,11 @@ services:
     depends_on:
       - web
 
-  acme_sh:
-    image: acmesh/acme.sh
+  certbot:
+    image: certbot/certbot:latest
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
-    command: sh -c "acme.sh --issue -d abc0070033.fvds.ru -w /var/www/certbot/ --httpport 1337 && acme.sh --install-cert -d abc0070033.fvds.ru --cert-file /etc/nginx/ssl/live/abc0070033.fvds.ru/fullchain.pem --key-file /etc/nginx/ssl/live/abc0070033.fvds.ru/privkey.pem --reloadcmd 'nginx -s reload'"
     depends_on:
       - nginx
 
