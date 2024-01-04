@@ -14,8 +14,8 @@ services:
       && python manage.py compilemessages
       && gunicorn advent_naughty.wsgi:application --bind 0.0.0.0:8000"
     volumes:
-      - /static/:/home/app/web/static
-      - /media/:/home/app/web/media
+      - static_volume:/home/app/web/static
+      - media_volume:/home/app/web/media
     ports:
       - 8000:8000
     depends_on:
@@ -47,3 +47,5 @@ services:
 
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
