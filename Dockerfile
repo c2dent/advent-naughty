@@ -30,7 +30,6 @@ FROM python:3.10.10
 
 RUN mkdir -p /home/app
 
-RUN addgroup app && adduser --ingroup app app
 
 # create the appropriate directories
 ENV HOME=/home/app
@@ -50,5 +49,8 @@ COPY ./config/entrypoint.prod.sh $APP_HOME
 
 # copy project
 COPY . $APP_HOME
+
+# chown all the files to the app user
+
 
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
