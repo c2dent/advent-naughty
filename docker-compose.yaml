@@ -6,13 +6,16 @@ services:
     build: .
     image: myapp:latest
     env_file:
-      - ./config/.env.dev
+      - ./config/.env.prod
     command: >
       bash -c "python manage.py migrate
       && python manage.py collectstatic --no-input
-      && python manage.py runserver 0.0.0.0:8000"
+      && python manage.py makemessages -a
+      && python manage.py compilemessages
+      && gunicorn advent_naughty.wsgi:application --bind 0.0.0.0:8000"
     volumes:
-      - .:/usr/src/app/
+      - /static/:/home/app/web/static
+      - /media/:/home/app/web/media
     ports:
       - 8000:8000
     depends_on:
@@ -21,7 +24,7 @@ services:
   bot:
     image: myapp:latest
     env_file:
-      - ./config/.env.dev
+      - ./config/.env.prod
     command: python manage.py run_bot
     depends_on:
       - db
@@ -40,7 +43,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - ./config/.db.env
+      - ./config/.db.prod.env
 
 volumes:
   postgres_data:
