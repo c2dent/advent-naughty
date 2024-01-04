@@ -54,7 +54,7 @@ COPY . $APP_HOME
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
 
-USER app
+#USER app
 
 RUN chmod +x /home/app/web/entrypoint.prod.sh
 
