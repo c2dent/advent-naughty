@@ -1,18 +1,61 @@
-FROM python:3.10.10
+###########
+# BUILDER #
+###########
+
+FROM python:3.10.10 as builder
 
 WORKDIR /usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-RUN apt update && apt install -y libpq-dev gcc python3-dev musl-dev gettext
+RUN apt update && apt install -y libpq-dev gcc python3-dev musl-dev gettext netcat
 
 RUN pip install --upgrade pip
+RUN pip install flake8
+
+COPY . .
+
+# RUN flake8 --ignore=E501,F401 .
 
 COPY ./requirements.txt .
 
-RUN pip install -r requirements.txt
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
-COPY ./config/entrypoint.sh .
+#########
+# FINAL #
+#########
 
-COPY . .
+FROM python:3.10.10
+
+RUN mkdir -p /home/app
+
+RUN addgroup app && adduser --ingroup app app
+
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/static
+RUN mkdir $APP_HOME/media
+WORKDIR $APP_HOME
+
+# install dependencies
+RUN apt update && apt install -y libpq-dev gettext netcat
+COPY --from=builder /usr/src/app/wheels /wheels
+COPY --from=builder /usr/src/app/requirements.txt .
+RUN pip install --no-cache /wheels/*
+
+COPY ./config/entrypoint.prod.sh $APP_HOME
+
+# copy project
+COPY . $APP_HOME
+
+# chown all the files to the app user
+RUN chown -R app:app $APP_HOME
+
+USER app
+
+RUN chmod +x /home/app/web/entrypoint.prod.sh
+
+ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
