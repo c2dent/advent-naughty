@@ -9,7 +9,7 @@ urlpatterns = [
     path('djrichtextfield/', include('djrichtextfield.urls')),
     path('advent/<int:user_id>/', views.advent, name='advent'),
     path('send-message/', views.send_message, name='send_message'),
-]
+] + [re_path(r"^static/(?P<path>.*)$", serve), re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT})]
 
 if settings.DEBUG:
     urlpatterns += [

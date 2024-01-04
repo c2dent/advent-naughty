@@ -51,11 +51,4 @@ COPY ./config/entrypoint.prod.sh $APP_HOME
 # copy project
 COPY . $APP_HOME
 
-# chown all the files to the app user
-RUN chown -R app:app $APP_HOME
-
-#USER app
-
-RUN chmod +x /home/app/web/entrypoint.prod.sh
-
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
