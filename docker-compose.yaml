@@ -32,7 +32,7 @@ services:
   task:
     image: myapp:latest
     env_file:
-      - ./config/.env.dev
+      - ./config/.env.prod
     command: python manage.py run_task
     depends_on:
       - db
