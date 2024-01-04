@@ -76,3 +76,5 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
+
+# docker exec -it advent_web python manage.py createsuperuser
