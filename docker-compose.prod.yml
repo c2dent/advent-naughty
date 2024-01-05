@@ -56,7 +56,6 @@ services:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
       - ${CERTS_PATH}/${DOMEN}:/etc/letsencrypt/live/${DOMEN}
-      - ${OPTIONS_SSL_PATH}:/etc/letsencrypt/options-ssl-nginx.conf
       - ${DH_PARAMS_PATH}:/etc/letsencrypt/ssl-dhparams.pem
     ports:
       - 8443:8443
