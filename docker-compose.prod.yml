@@ -56,21 +56,13 @@ services:
     volumes:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro
-      - ./certbot/www:/var/www/certbot/:ro
+      - ${CERTS_PATH}:/etc/letsencrypt/live/${DOMEN}
+      - ${OPTIONS_SSL_PATH}:/etc/letsencrypt/options-ssl-nginx.conf
+      - ${DH_PARAMS_PATH}:/etc/letsencrypt/ssl-dhparams.pem
     ports:
-      - 80:80
-      - 443:443
+      - 8443:8443
     depends_on:
       - web
-
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-    depends_on:
-      - nginx
 
 volumes:
   postgres_data:
