@@ -57,5 +57,7 @@ RUN chown -R app:app $APP_HOME
 USER app
 
 RUN chmod +x /home/app/web/entrypoint.prod.sh
+RUN chown -R app:app /home/app/web/static
+RUN chown -R app:app /home/app/web/media
 
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
