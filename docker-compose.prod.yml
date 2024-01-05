@@ -51,6 +51,8 @@ services:
 
   nginx:
     build: ./nginx
+    env_file:
+      - ./config/.env.prod
     restart: unless-stopped
     volumes:
       - static_volume:/home/app/web/static
