@@ -57,7 +57,9 @@ services:
     volumes:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
-      - ${CERTS_PATH}/${DOMEN}:/etc/letsencrypt/live/${DOMEN}
+      - /etc/letsencrypt/live/abc0070033.fvds.ru:/etc/letsencrypt/live/abc0070033.fvds.ru
+      - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
+      - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
     ports:
       - 8443:8443
     depends_on:
