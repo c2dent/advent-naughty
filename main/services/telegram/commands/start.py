@@ -13,7 +13,7 @@ def start(m: types.Message, bot: TeleBot):
 
     reply_markup = types.InlineKeyboardMarkup(row_width=1)
     reply_markup.add(
-        types.InlineKeyboardButton("Advent Calеndar IT MY HUB", web_app=WebAppInfo(url))
+        types.InlineKeyboardButton("Advent Calеndar", web_app=WebAppInfo(url))
     )
     bot.send_message(m.chat.id, message, reply_markup=reply_markup, parse_mode='HTML')
     bot.set_chat_menu_button(chat_id=m.chat.id, menu_button=MenuButtonWebApp(text='Calendar', web_app=WebAppInfo(url), type='web_app'))
