@@ -68,4 +68,4 @@ volumes:
   static_volume:
   media_volume:
 
-# docker exec -it advent_web python m anage.py createsuperuser
+# docker exec -it advent_web python manage.py createsuperuser
