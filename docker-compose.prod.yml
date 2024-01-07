@@ -45,6 +45,9 @@ services:
     image: myapp:latest
     env_file:
       - ./config/.env.prod
+    volumes:
+      - static_volume:/home/app/web/static
+      - media_volume:/home/app/web/media
     command: python manage.py run_task
     depends_on:
       - db
