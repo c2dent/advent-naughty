@@ -48,6 +48,10 @@ body {
 }
 
 .box-curtain {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
     width: 106px;
     height: 147px;
     -webkit-backdrop-filter: blur(2px);
@@ -56,7 +60,6 @@ body {
     position: relative;
     border-radius: 8px;
     margin-bottom: 15px;
-    transform: translate3d(0, 0, 0);
 }
 
 .second-screen-avatar {
