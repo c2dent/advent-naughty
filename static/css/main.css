@@ -56,7 +56,7 @@ body {
     height: 147px;
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
-    filter: blur(200px);
+    filter: blur(2px);
     -webkit-filter: blur(2px);
     position: relative;
     border-radius: 8px;

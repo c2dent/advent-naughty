@@ -86,8 +86,8 @@
                     <div class="item-box" @click="() => openModal(item)" style="cursor: pointer;"
                          :style="'background-image: url(' + item.cell.webapp_image + ');'">
 
-                        <div>
-                            <div class="box-curtain"></div>
+                        <div v-if="!item.cell.available || !item.is_opened">
+                            <div class="box-curtain" style="filter: blur(2px); -webkit-filter: blur(2px); transform: translate3d(0, 0, 0);"></div>
                         </div>
 
 
