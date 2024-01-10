@@ -50,6 +50,7 @@ body {
 .box-curtain {
     width: 106px;
     height: 147px;
+    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
     position: relative;
     border-radius: 8px;
