@@ -56,7 +56,7 @@ body {
     position: relative;
     border-radius: 8px;
     margin-bottom: 15px;
-    mix-blend-mode: hard-light;
+    transform: translate3d(0, 0, 0);
 }
 
 .second-screen-avatar {
