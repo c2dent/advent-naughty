@@ -87,7 +87,7 @@
                          :style="'background-image: url(' + item.cell.webapp_image + ');'">
 
                         <div v-if="!item.cell.available || !item.is_opened">
-                            <div class="box-curtain" style="filter: blur(2px); -webkit-filter: blur(2px); transform: translate3d(0, 0, 0);"></div>
+                            <div class="box-curtain" style="-webkit-backdrop-filter: blur(2px); transform: translate3d(0, 0, 0); -webkit-transform: translate3d(0, 0, 0);"></div>
                         </div>
 
 
