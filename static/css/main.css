@@ -55,6 +55,7 @@ body {
     position: relative;
     border-radius: 8px;
     margin-bottom: 15px;
+    mix-blend-mode: hard-light;
 }
 
 .second-screen-avatar {
