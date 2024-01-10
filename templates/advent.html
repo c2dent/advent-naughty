@@ -85,7 +85,7 @@
                 <div v-for="item in userCells" :key="item.id" class="cell-item-wrapper">
                     <div class="item-box" @click="() => openModal(item)" style="cursor: pointer;" :style="'background-image: url(' + item.cell.webapp_image + ');'">
 
-                        <div class="box-curtain" :style="{ height: (!item.cell.available || !item.is_opened) ? '1px' : '147px' }"></div>
+                        <div class="box-curtain" :style="{ height: (!item.cell.available || !item.is_opened) ? '1px' : '147px !important' }"></div>
 
                         <div class="cell-status">
                             <img v-if="item.is_opened" src="{% static 'images/opened-icon.svg' %}" alt="" width="16">
